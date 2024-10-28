@@ -1,0 +1,16 @@
+SELECT SUM(ci.population) FROM city ci INNER JOIN country co ON ci.countrycode = co.code AND co.continent = "Asia";
+
+
+-- ADDITIONALLY 
+-- Below is the Stored Procedure for this problems where you can get the population of any continent by giving the continent name as the parameter of stored procedure:
+
+DELIMITER $$
+CREATE PROCEDURE population_census_by_continent(IN conti VARCHAR(13))
+BEGIN
+SELECT SUM(ci.population) FROM city ci 
+INNER JOIN country co 
+ON ci.countrycode = co.code AND co.continent = conti;
+END $$
+DELIMITER ;
+
+CALL population_census_by_continent("Asia");
