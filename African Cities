@@ -1,0 +1,15 @@
+SELECT ci.name FROM city ci INNER JOIN country co ON ci.countrycode = co.code AND co.continent = "Africa";
+
+-- ADDITIONALLY
+-- Below is the stored procedure to get all the city names of any continent by giving the continent name in the parameter of stored procedure:
+
+DELIMITER $$
+CREATE PROCEDURE city_names_by_continent(IN conti VARCHAR(13))
+BEGIN
+SELECT ci.name FROM city ci 
+INNER JOIN country co 
+ON ci.countrycode = co.code AND co.continent = conti;
+END $$
+DELIMITER ;
+
+CALL city_names_by_continent("Africa");
